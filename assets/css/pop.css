@@ -1,0 +1,27 @@
+
+html {
+    background: rgba(165, 42, 42, 0.5);
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background: linear-gradient(to right, transparent 50%, blue 50%);
+    margin: 0;
+}
+
+h1 {
+    background-color: #0002;
+    backdrop-filter: blur(5px);
+    -webkit-app-region: drag;
+    margin: 0;
+}
+
+.content {
+    /* background-color: green; */
+    height: 100%;
+    opacity: .8;
+    width: 100%;
+}

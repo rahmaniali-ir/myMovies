@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>myMovies</title>
+    <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <link rel="stylesheet" href="../assets/css/main.css">
+  </head>
+  <body>
+    <div class="title-bar">
+      <div class="app-title">
+        myMovies
+      </div>
+
+      <div class="window-box">
+        <button id="exit">x</button>
+        <button id="maximize">=</button>
+        <button id="minimize">_</button>
+      </div>
+    </div>
+
+    <header>
+      <nav>Nav</nav>
+
+      <div class="slides">
+        <div class="slide">
+          <img class="back" src="./img/poster3.jpg" alt="ad">
+
+          <div class="content">
+            <div class="poster">
+              <img src="./img/poster3.jpg" alt="ad">
+            </div>
+
+            <div class="details">
+              <div class="name">The Joker</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="movies-wrapper">
+      </section>
+
+      <footer>Footer</footer>
+    </main>
+
+    <!-- <script src="../lib/notif.js"></script> -->
+    <script src="../lib/movie-card.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>
