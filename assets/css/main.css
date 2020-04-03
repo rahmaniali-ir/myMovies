@@ -10,7 +10,7 @@
     --primary: rgb(211, 52, 52);
 }
 
-::-webkit-scrollbar {
+*::-webkit-scrollbar {
     display: none;
 }
 
