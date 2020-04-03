@@ -6,6 +6,8 @@
 :root {
     --background: #0E161B;
     --background: #eee;
+
+    --primary: rgb(211, 52, 52);
 }
 
 ::-webkit-scrollbar {
@@ -59,10 +61,14 @@ body {
 
 .window-box button {
     align-items: center;
+    box-sizing: border-box;
+    color: #0008;
     cursor: pointer;
     display: flex;
+    font-size: 10px;
     height: inherit;
     justify-content: center;
+    padding: 4px;
     width: 24px;
 }
 
@@ -70,101 +76,8 @@ body {
     background-color: #0001;
 }
 
-header {
-    height: 400px;
-    position: relative;
-    z-index: 1;
-}
-
-nav {
-    left: 0;
-    padding: .8em 1.6em;
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
-
-.slides {
-    height: 100%;
-    position: relative;
-}
-
-.slide,
-.slide::after,
-.slide .back {
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
-
-.slide {
-    overflow: hidden;
-}
-
-.slide::after {
-    background: radial-gradient(circle at 50% -30%, transparent, var(--background) 80%);
-    content: '';
-    z-index: 1;
-}
-
-.slide .back {
-    filter: blur(8px);
-    object-fit: cover;
-    transform: scale(1.2);
-    z-index: 0;
-}
-
-.slide .content {
-    display: flex;
-    flex-direction: row-reverse;
-    height: 100%;
-    padding: 10%;
-    position: relative;
-    z-index: 5;
-}
-
-.slide .poster {
-    border-radius: 4px;
-    height: 100%;
-    position: relative;
-    transform: perspective(500px) rotateY(-15deg);
-}
-
-.slide .poster::after {
-    background-color: #000;
-    border-radius: inherit;
-    content: '';
-    display: block;
-    filter: blur(5px);
-    height: 100%;
-    left: 8px;
-    opacity: .3;
-    position: absolute;
-    top: -5px;
-    width: 100%;
-    z-index: 0;
-}
-
-.slide .poster img {
-    border-radius: inherit;
-    height: 100%;
-    pointer-events: none;
-    position: relative;
-    z-index: 1;
-}
-
-.slide .details {
-    margin-right: 1em;
-}
-
-main {
-    height: 100%;
-}
-
-main section {
-    --columns: 4;
+.movies-wrapper {
+    --columns: 6;
 
     display: grid;
     grid-gap: 20px;
@@ -173,8 +86,133 @@ main section {
     padding: 0 5%;
 }
 
-@media (max-width: 500px) {
-    main section {
+@media (max-width: 1024px) {
+    .movies-wrapper {
+        --columns: 5;
+    }
+}
+
+@media (max-width: 720px) {
+    .movies-wrapper {
+        --columns: 4;
+    }
+}
+
+@media (max-width: 512px) {
+    .movies-wrapper {
         --columns: 3;
     }
+}
+
+.loading {
+    align-items: center;
+    background: radial-gradient(circle at 50% -50%, #0ac, #077f97);
+    background-color: #0ac;
+    color: #fff;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: all .3s ease;;
+    width: 100vw;
+}
+
+.loading.done {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1.2) translateY(20%);
+}
+
+@keyframes loading {
+    0% {
+        opacity: 0;
+        transform: scale(1.2);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.loading .content {
+    align-items: center;
+    animation: loading 4s ease forwards;
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes spinn {
+    0% {
+        transform: rotateX(0);
+    }
+
+    100% {
+        transform: rotateX(360deg);
+    }
+}
+
+.loading .spinner {
+    animation: spinn 4s linear infinite;
+    height: 32px;
+    perspective: 500px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: all 1s ease;
+    width: 64px;
+}
+
+@keyframes spinn-element {
+    0%, 20%, 100% {
+        opacity: 1;
+    }
+
+    30%, 70% {
+        opacity: 0;
+    }
+}
+
+.loading .spinner > div {
+    animation: spinn-element 4s linear infinite;
+    align-items: stretch;
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transform-style: preserve-3d;
+    width: 100%;
+}
+
+.loading .spinner > div:nth-child(1) { transform: translateZ(-32px) scale(.7); animation-delay: .5s; }
+.loading .spinner > div:nth-child(2) { transform: rotateX(-45deg) translateZ(-32px) scale(.7); animation-delay: .5s; }
+.loading .spinner > div:nth-child(3) { transform: rotateX(-90deg) translateZ(-32px) scale(.7); animation-delay: 1s; }
+.loading .spinner > div:nth-child(4) { transform: rotateX(-135deg) translateZ(-32px) scale(.7); animation-delay: 1.5s; }
+.loading .spinner > div:nth-child(5) { transform: rotateX(-180deg) translateZ(-32px) scale(.7); animation-delay: 2s; }
+.loading .spinner > div:nth-child(6) { transform: rotateX(-225deg) translateZ(-32px) scale(.7); animation-delay: 2.5s; }
+.loading .spinner > div:nth-child(7) { transform: rotateX(-270deg) translateZ(-32px) scale(.7); animation-delay: 3s; }
+.loading .spinner > div:nth-child(8) { transform: rotateX(-315deg) translateZ(-32px) scale(.7); animation-delay: 3.5s; }
+
+.loading .spinner i {
+    display: block;
+    background-color: currentColor;
+    border-radius: 4px;
+    height: 100%;
+    width: 100%;
+}
+
+.loading .spinner i:nth-child(3) {
+    grid-column: 2/6;
+    grid-row: 1/4;
+}
+
+.loading .content > span {
+    display: block;
+    margin-top: 30px;
+    opacity: .5;
 }

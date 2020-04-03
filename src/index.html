@@ -14,40 +14,41 @@
       </div>
 
       <div class="window-box">
-        <button id="exit">x</button>
-        <button id="maximize">=</button>
-        <button id="minimize">_</button>
+        <button id="exit"><i-con name="close" /></button>
+        <button id="maximize"><i-con name="maximize" /></button>
+        <button id="minimize"><i-con name="minimize" /></button>
       </div>
     </div>
 
-    <header>
-      <nav>Nav</nav>
+    <show-case
+      name="Joker"
+      year="2019"
+      duration="125"
+      image="./img/poster3.jpg">
+      <div class="movies-wrapper"></div>
+    </show-case>
 
-      <div class="slides">
-        <div class="slide">
-          <img class="back" src="./img/poster3.jpg" alt="ad">
-
-          <div class="content">
-            <div class="poster">
-              <img src="./img/poster3.jpg" alt="ad">
-            </div>
-
-            <div class="details">
-              <div class="name">The Joker</div>
-            </div>
-          </div>
+    <div class="loading">
+      <div class="content">
+        <div class="spinner">
+          <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <!-- <div><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div> -->
         </div>
+
+        <span>My Movies (Beta)</span>
       </div>
-    </header>
-
-    <main>
-      <section class="movies-wrapper">
-      </section>
-
-      <footer>Footer</footer>
-    </main>
+    </div>
 
     <!-- <script src="../lib/notif.js"></script> -->
+    <script src="../lib/i-con.js"></script>
+    <script src="../lib/show-case.js"></script>
     <script src="../lib/movie-card.js"></script>
     <script src="./index.js"></script>
   </body>
