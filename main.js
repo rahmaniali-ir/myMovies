@@ -8,8 +8,8 @@ function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({
     frame: false,
-    width: 800,
-    height: 600,
+    width: 1000,
+    height: 800,
     minWidth: 400,
     minHeight: 400,
     webPreferences: {
@@ -21,7 +21,7 @@ function createWindow () {
   win.loadFile('src/index.html')
 
   // Open the DevTools.
-  // win.webContents.openDevTools()
+  win.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished

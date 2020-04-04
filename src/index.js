@@ -9,7 +9,7 @@ const { exec } = require("child_process");
 const Bank = require('../lib/bank');
 const { dialog } = electron.remote;
 let settings = require('../lib/settings');
-const checkTargetFolders = require('../lib/explorer');
+const { checkTargetFolders, saveImage } = require('../lib/explorer');
 
 // database connection
 const myBank = new Bank(path.join(__dirname, '../database.db'));
@@ -56,7 +56,7 @@ let loadingDone = false;
 let timer = setInterval(() => {
     time++;
 
-    if(loadingDone && time > 3) {
+    if(loadingDone && time > 0) {
         hideLoading();
         clearInterval(timer);
     }
@@ -65,6 +65,22 @@ let timer = setInterval(() => {
 checkTargetFolders(newMovies => {
     console.log('All done!', newMovies + ' new movies discovered!');
     loadingDone = true;
+    let allMovies = movies.data;
+
+    setTimeout(() => {
+        allMovies.forEach((movie, index) => {
+            setTimeout(() => {
+                let mov = new MovieCard();
+                mov.name = movie.name;
+                mov.image = movie.image ? fs.readFileSync(movie.image) : '';
+                mov.addEventListener('play', () => {
+                    console.log(movie.path);
+                    exec(`"${ movie.path }"`);
+                });
+                document.querySelector('.movies-wrapper').append(mov);
+            }, 50 * index);
+        });
+    }, 1000);
 });
 
 // handle window state buttons
