@@ -8,6 +8,8 @@
     --background: #eee;
 
     --primary: rgb(211, 52, 52);
+
+    --title-bar: 24px;
 }
 
 ::-webkit-scrollbar {
@@ -39,7 +41,7 @@ body {
     background-color: #fff2;
     backdrop-filter: blur(4px);
     display: flex;
-    height: 24px;
+    height: var(--title-bar);
     left: 0;
     position: fixed;
     top: 0;

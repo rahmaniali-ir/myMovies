@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, Tray, ipcMain } = require('electron')
+const { app, BrowserWindow, Menu, Tray, ipcMain, systemPreferences } = require('electron')
 const shell = require('electron').shell
 const path = require('path')
 const ipc = ipcMain;
@@ -14,7 +14,7 @@ function createWindow () {
     minHeight: 400,
     webPreferences: {
       nodeIntegration: true
-    }
+    },
   });
 
   // and load the index.html of the app.
@@ -23,6 +23,10 @@ function createWindow () {
   // Open the DevTools.
   win.webContents.openDevTools()
 }
+
+// ipc.on('ha', () => {
+//   win.webContents.send('coloor', systemPreferences.isDarkMode());
+// });
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

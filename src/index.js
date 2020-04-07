@@ -2,7 +2,7 @@
 const electron = require('electron');
 const path = require('path');
 // const BrowserWindow = electron.remote.BrowserWindow;
-// const ipc = electron.ipcRenderer;
+const ipc = electron.ipcRenderer;
 const currentWindow = electron.remote.getCurrentWindow();
 const fs = require('fs');
 const { exec } = require("child_process");
@@ -63,7 +63,20 @@ let timer = setInterval(() => {
 }, 1000);
 
 checkTargetFolders(newMovies => {
-    console.log('All done!', newMovies + ' new movies discovered!');
+    let newMoviesNotif = new Notif();
+    newMoviesNotif.status = 'information';
+    newMoviesNotif.duration = 5;
+
+    if(newMovies > 0) {
+        newMoviesNotif.name = 'New movies discovered!';
+        let text = newMovies > 1 ? `${ newMovies } new movies` : `A new movie`;
+        newMoviesNotif.text = text + ' have been added!';
+    } else {
+        newMoviesNotif.name = 'All the same!';
+        newMoviesNotif.text = 'No new movies have been found.';
+    }
+    document.body.appendChild(newMoviesNotif);
+
     loadingDone = true;
     let allMovies = movies.data;
 
@@ -74,7 +87,6 @@ checkTargetFolders(newMovies => {
                 mov.name = movie.name;
                 mov.image = movie.image ? fs.readFileSync(movie.image) : '';
                 mov.addEventListener('play', () => {
-                    console.log(movie.path);
                     exec(`"${ movie.path }"`);
                 });
                 document.querySelector('.movies-wrapper').append(mov);
@@ -82,6 +94,11 @@ checkTargetFolders(newMovies => {
         });
     }, 1000);
 });
+
+// ipc.send('ha');
+// ipc.on('coloor', (e, color) => {
+//     console.log(color);
+// })
 
 // handle window state buttons
 const windowStates = {
