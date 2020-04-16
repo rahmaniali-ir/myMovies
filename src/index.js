@@ -70,10 +70,10 @@ checkTargetFolders(newMovies => {
     if(newMovies > 0) {
         newMoviesNotif.name = 'New movies discovered!';
         let text = newMovies > 1 ? `${ newMovies } new movies` : `A new movie`;
-        newMoviesNotif.text = text + ' have been added!';
+        newMoviesNotif.text = text + ' has been added!';
     } else {
         newMoviesNotif.name = 'All the same!';
-        newMoviesNotif.text = 'No new movies have been found.';
+        newMoviesNotif.text = 'No new movie found.';
     }
     document.body.appendChild(newMoviesNotif);
 
