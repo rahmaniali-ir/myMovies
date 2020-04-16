@@ -62,22 +62,7 @@ let timer = setInterval(() => {
     }
 }, 1000);
 
-checkTargetFolders(newMovies => {
-    let newMoviesNotif = new Notif();
-    newMoviesNotif.status = 'information';
-    newMoviesNotif.duration = 5;
-
-    if(newMovies > 0) {
-        newMoviesNotif.name = 'New movies discovered!';
-        let text = newMovies > 1 ? `${ newMovies } new movies` : `A new movie`;
-        newMoviesNotif.text = text + ' has been added!';
-    } else {
-        newMoviesNotif.name = 'All the same!';
-        newMoviesNotif.text = 'No new movie found.';
-    }
-    document.body.appendChild(newMoviesNotif);
-
-    loadingDone = true;
+function renderMovies() {
     let allMovies = movies.data;
 
     setTimeout(() => {
@@ -93,7 +78,29 @@ checkTargetFolders(newMovies => {
             }, 50 * index);
         });
     }, 1000);
-});
+}
+
+function notifyNewMovies(newMovies) {
+    let newMoviesNotif = new Notif();
+    newMoviesNotif.status = 'information';
+    newMoviesNotif.duration = 5;
+
+    if(newMovies > 0) {
+        newMoviesNotif.name = 'New movies discovered!';
+        let text = newMovies > 1 ? `${ newMovies } new movies` : `A new movie`;
+        newMoviesNotif.text = text + ' has been added!';
+    } else {
+        newMoviesNotif.name = 'All the same!';
+        newMoviesNotif.text = 'No new movie found.';
+    }
+    document.body.appendChild(newMoviesNotif);
+}
+
+checkTargetFolders().then(newMovies => {
+    loadingDone = true;
+    renderMovies();
+    notifyNewMovies(newMovies);
+}).catch(err => console.error(err));
 
 // ipc.send('ha');
 // ipc.on('coloor', (e, color) => {
