@@ -64,6 +64,7 @@ let timer = setInterval(() => {
 
 function renderMovies() {
     let allMovies = movies.data;
+    let moviesWrapper = document.querySelector('.movies-wrapper');
 
     setTimeout(() => {
         allMovies.forEach((movie, index) => {
@@ -71,9 +72,19 @@ function renderMovies() {
                 let mov = new MovieCard();
                 mov.name = movie.name;
                 mov.image = movie.image ? fs.readFileSync(movie.image) : '';
+
                 mov.addEventListener('play', () => {
                     exec(`"${ movie.path }"`);
                 });
+
+                mov.addEventListener('mouse-in', () => {
+                    moviesWrapper.classList.add('mouse-in');
+                });
+
+                mov.addEventListener('mouse-out', () => {
+                    moviesWrapper.classList.remove('mouse-in');
+                });
+
                 document.querySelector('.movies-wrapper').append(mov);
             }, 50 * index);
         });

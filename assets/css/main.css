@@ -85,7 +85,6 @@ body {
 
     display: grid;
     grid-gap: 20px;
-    row-gap: 40px;
     grid-template-columns: repeat(var(--columns), minmax(50px, 1fr));
     padding: 0 5%;
 }
@@ -106,6 +105,18 @@ body {
     .movies-wrapper {
         --columns: 3;
     }
+}
+
+movie-card {
+    transition: all .5s .3s ease;
+}
+
+.movies-wrapper.mouse-in:hover movie-card {
+    opacity: .6;
+}
+
+.movies-wrapper movie-card:hover {
+    opacity: 1 !important;
 }
 
 .loading {
